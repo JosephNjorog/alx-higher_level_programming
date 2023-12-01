@@ -1,5 +1,5 @@
 #include "lists.h"
-
+#include <stdlib.h>
 /**
  * allocate_memory - allocate required memory for an array
  * @head: head node of listint_t
