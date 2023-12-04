@@ -1,59 +1,71 @@
 #include "lists.h"
-#include <stdlib.h>
+
 /**
- * allocate_memory - allocate required memory for an array
- * @head: head node of listint_t
- *
- * Return: allocated array
+ * reverse_listint - reverses a linked list
+ * @head: pointer to the first node in the list
+ * Return: pointer to the first node in the new list
  */
-int *allocate_memory(listint_t *head)
+void reverse_listint(listint_t **head)
 {
-	int *arr;
-	size_t size;
+	listint_t *prev = NULL;
+	listint_t *current = *head;
+	listint_t *next = NULL;
 
-	size = 0;
-	while (head)
-		size++, head = head->next;
+	while (current)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
 
-	arr = malloc(sizeof(int) * size);
-	if (!arr)
-		exit(1);
-	return (arr);
+	*head = prev;
 }
 
 /**
- * is_palindrome - checks if a list is palindrom
- * @head: pointer to head node of list
+ * is_palindrome - checks if a linked list is a palindrome
+ * @head: double pointer to the linked list
  *
- * Return: 1 (Palindrom) | 0 (Not a Palindrom)
+ * Return: 1 if it is, 0 if not
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *tmp;
-	int i, *values;
+	listint_t *slow = *head, *fast = *head, *temp = *head, *dup = NULL;
 
-	if (!head || !(*head))
+	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
-	values = allocate_memory(*head);
-	tmp = *head, i = -1;
-	while (tmp)
+	while (1)
 	{
-		values[++i] = tmp->n;
-		tmp = tmp->next;
-	}
-
-	tmp = *head;
-	for (; i >= 0; i--)
-	{
-		if (values[i] != tmp->n)
+		fast = fast->next->next;
+		if (!fast)
 		{
-			free(values);
-			return (0);
+			dup = slow->next;
+			break;
 		}
-		tmp = tmp->next;
+		if (!fast->next)
+		{
+			dup = slow->next->next;
+			break;
+		}
+		slow = slow->next;
 	}
 
-	free(values);
-	return (1);
+	reverse_listint(&dup);
+
+	while (dup && temp)
+	{
+		if (temp->n == dup->n)
+		{
+			dup = dup->next;
+			temp = temp->next;
+		}
+		else
+			return (0);
+	}
+
+	if (!dup)
+		return (1);
+
+	return (0);
 }
