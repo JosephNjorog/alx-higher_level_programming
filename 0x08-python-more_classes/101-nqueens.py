@@ -21,12 +21,12 @@ if __name__ == "__main__":
 
     # initialize the answer list
     for i in range(n):
-        a.append([i, None])
+        a.append(-1)
 
     def already_exists(y):
         """check that a queen does not already exist in that y value"""
         for x in range(n):
-            if y == a[x][1]:
+            if y == a[x]:
                 return True
         return False
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
             return False
         i = 0
         while i < x:
-            if abs(a[i][1] - y) == abs(i - x):
+            if abs(a[i] - y) == abs(i - x):
                 return False
             i += 1
         return True
@@ -44,19 +44,21 @@ if __name__ == "__main__":
     def clear_a(x):
         """clears the answers from the point of failure on"""
         for i in range(x, n):
-            a[i][1] = None
+            a[i] = -1
 
     def print_solution():
         """prints the solution in the required format"""
+        result = []
         for i in range(n):
-            print([i, a[i][1]])
+            result.append([i, a[i]])
+        print(result)
 
     def nqueens(x):
         """recursive backtracking function to find the solution"""
         for y in range(n):
             clear_a(x)
             if reject(x, y):
-                a[x][1] = y
+                a[x] = y
                 if x == n - 1:  # accepts the solution
                     print_solution()
                 else:
