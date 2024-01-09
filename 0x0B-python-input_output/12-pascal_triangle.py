@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-Defines a Pascal's Triangle function by Joe Mwangi 
+This is '12-pascal_triangle' module by Joe Mwangi.
+Functions and Classes:
+    def pascal_triangle(n)
 """
 
 
