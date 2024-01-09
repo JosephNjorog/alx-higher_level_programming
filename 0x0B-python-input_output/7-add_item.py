@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Add all arguments to a Python list and save them to a file by Joe mw."""
+"""
+This is '7-add_item' module by Joe Mwangi.
+Functions and Classes:
+    ...
+"""
 
 
 from sys import argv
