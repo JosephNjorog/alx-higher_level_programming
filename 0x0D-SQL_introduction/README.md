@@ -59,4 +59,6 @@ MySQL
    - Replace `table_name` with the name of the table you want to insert into.
    - Specify the columns and their values accordingly.
 
-I'll continue with the rest of the tasks in the next message.
+
+
+
